@@ -1,0 +1,5 @@
+export type ErrorCode = 'INVALID_DATA' |
+  'DRIVER_NOT_FOUND' |
+  'INVALID_DISTANCE' |
+  'INVALID_DRIVER' |
+  'NO_RIDES_FOUND';
