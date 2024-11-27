@@ -1,15 +1,14 @@
-import { Database } from "../database";
-import { Driver } from "./model/driver.model";
+import { Database } from "../database"
+import { Driver } from "./model/driver.model"
 
 export class DriverRepository {
-  private db: Database;
+  private db: Database
 
   constructor() {
-    this.db = Database.getInstance();
+    this.db = Database.getInstance()
   }
 
   async findByDistance(distance: number): Promise<Driver[]> {
-    console.log('##### DriverRepository.findByDistance', distance);
     const query = `
       SELECT
         d.id,
@@ -25,14 +24,35 @@ export class DriverRepository {
       LEFT JOIN ratings r ON d.id = r.driver_id
       WHERE $1 > min_distance
       GROUP BY d.id
-    `;
+    `
 
     try {
-      const result = await this.db.query(query, [distance]);
-      return result.rows;
+      const result = await this.db.query(query, [distance])
+      return result.rows
     } catch (error) {
-      console.log('find customer error: ', error);
-      throw error;
+      console.log('Driver findByDistance error: ', error)
+      throw error
+    }
+  }
+
+  async findById(id: number): Promise<Driver> {
+    const query = `
+      SELECT
+        id,
+        name,
+        description,
+        car,
+        tax
+      FROM drivers
+      WHERE id = $1
+    `
+
+    try {
+      const result = await this.db.query(query, [id])
+      return result.rows[0]
+    } catch (error) {
+      console.log('Driver findById error: ', error)
+      throw error
     }
   }
 }
