@@ -1,15 +1,15 @@
-import { Database } from "../database";
-import { Ride } from "./model/ride.model";
-import { RideCreateDto } from "../controllers/dto/ride-create.dto";
+import { Database } from "../database"
+import { Ride } from "./model/ride.model"
+import { RideConfirmDto } from "../controllers/dto/ride-confirm.dto"
 
 export class RideRepository {
-  private db: Database;
+  private db: Database
 
   constructor() {
-    this.db = Database.getInstance();
+    this.db = Database.getInstance()
   }
 
-  async create(rideCreateDto: RideCreateDto): Promise<Ride> {
+  async create(rideCreateDto: RideConfirmDto): Promise<Ride> {
     const {
       customerId,
       origin,
@@ -18,12 +18,12 @@ export class RideRepository {
       duration,
       driverId,
       value
-    } = rideCreateDto;
+    } = rideCreateDto
     const query = `
       INSERT INTO rides (customer_id, origin, destination, distance, duration, driver_id, value)
         VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING *
-    `;
+    `
 
     try {
       const result = await this.db.query(query, [
@@ -34,15 +34,15 @@ export class RideRepository {
         duration,
         driverId,
         value
-      ]);
-      return result.rows[0];
+      ])
+      return result.rows[0]
     } catch (error) {
-      console.log('create ride error: ', error);
-      throw error;
+      console.log('Ride create error: ', error)
+      throw error
     }
   }
 
-  async findAll(customerId: string, driverId?: number): Promise<Ride[]> {
+  async findAllByCustomer(customerId: string, driverId?: number): Promise<Ride[]> {
     let query = `
       SELECT
         r.id,
@@ -57,22 +57,22 @@ export class RideRepository {
       FROM rides r
       JOIN drivers d ON r.driver_id = d.id
       WHERE r.customer_id = $1
-    `;
-    const params: (string | number)[] = [customerId];
+    `
+    const params: (string | number)[] = [customerId]
 
     if (driverId) {
-      query += ' AND r.driver_id = $2';
-      params.push(driverId);
+      query += ' AND r.driver_id = $2'
+      params.push(driverId)
     }
 
-    query += ' ORDER BY r.created_at DESC';
+    query += ' ORDER BY r.created_at DESC'
 
     try {
-      const result = await this.db.query(query, params);
-      return result.rows;
+      const result = await this.db.query(query, params)
+      return result.rows
     } catch (error) {
-      console.log('find all rides error: ', error);
-      throw error;
+      console.log('Ride findAllByCustomer error: ', error)
+      throw error
     }
   }
 }

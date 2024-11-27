@@ -1,6 +1,5 @@
-export interface Ride {
-  id: number
-  customerId: number
+export interface RideConfirmDto {
+  customerId: string
   origin: string
   destination: string
   distance: number
