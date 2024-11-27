@@ -2,7 +2,6 @@ import axios from "axios"
 
 export class GoogleService {
   static baseRoutesUrl = 'https://routes.googleapis.com/directions/v2:computeRoutes'
-  static baseGeocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
 
   static async getRoutes(origin: string, destination: string) {
     const axiosInstance = axios.create({
@@ -22,7 +21,7 @@ export class GoogleService {
       })
       return result.data
     } catch (error) {
-      console.log('GoogleService.getRoutes error', error)
+      console.log('GoogleService getRoutes error', error)
       throw error
     }
   }
