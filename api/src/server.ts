@@ -4,7 +4,7 @@ import { App } from "./app"
 import { ErrorHandler } from "./middlewares/error-handler"
 import { Routes } from "./routes"
 
-dotenv.config({ path: path.join(__dirname, "../../.env") })
+dotenv.config({ path: path.join(__dirname, "../.env") })
 
 async function start() {
   try {

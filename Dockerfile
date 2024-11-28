@@ -4,6 +4,7 @@ FROM node:20.12.2 AS build-api
 WORKDIR /api
 
 COPY ./api/package*.json ./
+COPY ./.env ./
 RUN npm install
 
 COPY ./api ./
@@ -15,6 +16,7 @@ FROM node:20.12.2 AS build-front
 WORKDIR /front
 
 COPY ./front/package*.json ./
+COPY ./.env ./
 RUN npm install
 
 COPY ./front ./
@@ -25,10 +27,12 @@ FROM node:20.12.2
 
 WORKDIR /api
 COPY --from=build-api /api ./
+COPY ./.env ./
 EXPOSE 8080
 
 WORKDIR /front
 COPY --from=build-front /front ./
+COPY ./.env ./
 EXPOSE 80
 
 # Start API & Front
