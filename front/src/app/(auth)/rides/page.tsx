@@ -9,7 +9,7 @@ import styles from "./rides.module.css"
 
 export default function Rides() {
   const { customerId } = useContext(AuthContext)
-  const { drivers, rides, onListRides } = useContext(RideContext)
+  const { rides, onListRides } = useContext(RideContext)
 
   useEffect(() => {
     if (customerId) {
