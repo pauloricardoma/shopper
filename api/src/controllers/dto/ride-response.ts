@@ -1,12 +1,12 @@
-export interface Ride {
+export interface RideResponse {
   id: number
-  customer_id: string
+  customerId: string
   origin: string
   destination: string
   distance: number
   duration: string
-  driver_id: number
-  driver_name: string
+  driverId: number
+  driverName: string
   date: Date
   value: number
 }

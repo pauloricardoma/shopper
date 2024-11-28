@@ -1,27 +1,18 @@
-.page {
+.rides {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
   width: 100%;
-  min-height: 100svh;
+  min-height: 100vh;
   padding: 80px;
-  gap: 64px;
   font-family: var(--font-geist-sans);
 }
 
 .main {
-  width: 250px;
+  max-width: 400px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 32px;
-}
-
-.btnContainer {
-  width: 120px;
-  align-self: center;
-}
-
-@media (prefers-color-scheme: dark) {
-
+  overflow: scroll;
 }

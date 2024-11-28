@@ -1,21 +1,4 @@
 services:
-  # api:
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: .
-  #   hostname: api
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpus: "0.5"
-  #         memory: "160MB"
-
   db:
     image: postgres:latest
     environment:
@@ -31,8 +14,31 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: "160MB"
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    hostname: api
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+
+  front:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    hostname: front
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      api:
+        condition: service_started
+
+networks:
+  default:
+    driver: bridge

@@ -10,6 +10,7 @@ import { GoogleService } from "../services/google.service"
 import { DriverRepository } from "../repositories/driver.repository"
 import { EstimateResponseDto } from "../controllers/dto/estimate-response"
 import { RideConfirmDto } from "../controllers/dto/ride-confirm.dto"
+import { RideResponse } from "../controllers/dto/ride-response"
 
 export class RideUseCase {
   constructor(
@@ -110,6 +111,7 @@ export class RideUseCase {
       )
     }
 
+    const formatValue = Math.ceil(value * 100)
     await this.rideRepository.create({
       customerId,
       origin,
@@ -117,7 +119,7 @@ export class RideUseCase {
       distance,
       duration,
       driverId,
-      value
+      value: formatValue
     })
 
     return { success: true }
@@ -149,6 +151,19 @@ export class RideUseCase {
       throw new NotFoundError('Nenhum registro encontrado', 'NO_RIDES_FOUND')
     }
 
-    return rides
+    const response: RideResponse[] = rides.map((ride) => ({
+      id: ride.id,
+      customerId: ride.customer_id,
+      origin: ride.origin,
+      destination: ride.destination,
+      distance: ride.distance,
+      duration: ride.duration,
+      driverId: ride.driver_id,
+      driverName: ride.driver_name,
+      date: ride.date,
+      value: ride.value / 100
+    }))
+
+    return response
   }
 }

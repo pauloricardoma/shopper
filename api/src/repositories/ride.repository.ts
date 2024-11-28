@@ -20,9 +20,17 @@ export class RideRepository {
       value
     } = rideCreateDto
     const query = `
-      INSERT INTO rides (customer_id, origin, destination, distance, duration, driver_id, value)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING *
+      INSERT INTO rides (
+        customer_id,
+        origin,
+        destination,
+        distance,
+        duration,
+        driver_id,
+        value
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *
     `
 
     try {
@@ -46,6 +54,7 @@ export class RideRepository {
     let query = `
       SELECT
         r.id,
+        r.customer_id,
         r.origin,
         r.destination,
         r.distance,

@@ -6,7 +6,7 @@ export class Database {
 
   private constructor() {
     this.pool = new Pool({
-      host: 'localhost',
+      host: 'db',
       port: 5432,
       database: 'shopper',
       user: 'postgres',

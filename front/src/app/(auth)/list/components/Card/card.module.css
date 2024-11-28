@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.header {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.headerTitleText {
+  font-size: 16px;
+}
+
+.headerDescription {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.headerVehicle {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 6px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.value {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 6px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.textComment {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 6px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--background);
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.text {
+  font-size: 14px;
+  margin-top: 6px;
+}

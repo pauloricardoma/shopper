@@ -1,12 +1,19 @@
 import { Router } from "express";
 import { RideController } from "../controllers/ride.controller";
+import { AuthController } from "../controllers/auth.controller";
 
 export class Routes {
   public routes: Router
 
   constructor() {
     this.routes = Router()
+    this.authRoutes()
     this.rideRoutes()
+  }
+
+  private authRoutes() {
+    const authController = new AuthController()
+    this.routes.post('/auth/login', authController.login)
   }
 
   private rideRoutes() {
